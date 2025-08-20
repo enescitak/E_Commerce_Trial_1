@@ -1,46 +1,161 @@
-# Getting Started with Create React App
+# Fashion Admin Panel - Moda Mağazası Yönetim Paneli
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Modern ve kullanıcı dostu bir moda mağazası yönetim paneli. Küçük ve orta ölçekli moda mağazaları için özel olarak tasarlanmıştır.
 
-## Available Scripts
+## 🚀 Özellikler
 
-In the project directory, you can run:
+### ✅ Ana Dashboard
+- **Günlük satış özeti** ve temel KPI'lar
+- **Hızlı erişim** butonları (Yeni Ürün, Sipariş Görüntüle, vb.)
+- **Son siparişler** ve **en çok satan ürünler** listesi
+- **Düşük stok uyarıları** ve anlık bildirimler
 
-### `npm start`
+### ✅ Ürün & Envanter Yönetimi (Temel Odak)
+- **Kolay ürün ekleme**: Fotoğraf yükleme, isim, fiyat, beden/renk seçenekleri
+- **Ürün CRUD işlemleri**: Tam ürün yaşam döngüsü yönetimi
+- **Varyant yönetimi**: Farklı beden, renk ve özellik kombinasyonları
+- **Kategori sistemi**: Esnek kategori organizasyonu
+- **Stok takibi**: Otomatik stok güncellemeleri
+- **Düşük stok bildirimleri**: Kritik stok seviyesi uyarıları
+- **Aktif/Pasif ürün durumu** yönetimi
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### ✅ Sipariş Yönetimi
+- **Sipariş listesi** ve durum yönetimi (Beklemede, İşlemde, Kargoda, Teslim Edildi)
+- **Tek tıkla sipariş işlemleri**: Durum güncelleme, kargo takibi
+- **Müşteri bilgileri** ve sipariş detayları
+- **Sipariş filtreleme** ve arama özellikleri
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### ✅ Raporlama & Analitik
+- **Satış metrikleri**: Günlük/aylık gelir, sipariş sayısı
+- **En çok satan ürünler** analizi
+- **Kategori performansı** grafikleri
+- **Satış trendi** ve zaman bazlı analizler
+- **Veri export** özelliği (JSON formatında)
 
-### `npm test`
+### ✅ Ayarlar & Yönetim
+- **Mağaza ayarları**: İsim, para birimi, saat dilimi
+- **Kategori yönetimi**: Yeni kategori ekleme/düzenleme
+- **Ürün özellik tanımları**: Renk, beden, materyal vb.
+- **Bildirim ayarları**: Stok, sipariş bildirimleri
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### ✅ Mobil Uyumlu Tasarım
+- **Responsive design**: Telefon, tablet ve masaüstü uyumlu
+- **Modern UI/UX**: Tailwind CSS ile şık ve kullanışlı arayüz
+- **Kolay navigasyon**: Sezgisel menü yapısı
 
-### `npm run build`
+## 🛠️ Teknolojiler
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Frontend**: React 18, TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Charts**: Recharts
+- **Routing**: React Router v6
+- **State Management**: React Context + useReducer
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📦 Kurulum
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Depoyu klonlayın**:
+```bash
+git clone <repo-url>
+cd fashion-admin-panel
+```
 
-### `npm run eject`
+2. **Bağımlılıkları yükleyin**:
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. **Uygulamayı başlatın**:
+```bash
+npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. **Tarayıcıda açın**: `http://localhost:3000`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🎯 Kullanım Kılavuzu
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Ürün Ekleme
+1. **Dashboard** → **"Yeni Ürün"** butonuna tıklayın
+2. **Temel bilgileri** girin (isim, açıklama, SKU, fiyat)
+3. **Kategori** seçin
+4. **Ürün fotoğrafları** yükleyin (sürükle-bırak destekli)
+5. **Varyantlar** ekleyin (renk, beden kombinasyonları)
+6. **Stok miktarları** ve uyarı seviyelerini belirleyin
+7. **"Ürünü Oluştur"** ile kaydedin
 
-## Learn More
+### Sipariş Yönetimi
+1. **Siparişler** sayfasına gidin
+2. **Durum filtresi** ile siparişleri gruplandırın
+3. **Hızlı eylemler** ile sipariş durumunu güncelleyin:
+   - Beklemede → İşleme Al
+   - İşlemde → Kargoya Ver
+   - Kargoda → Teslim Et
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Raporları İnceleme
+1. **Raporlar** seyfasına gidin
+2. **Tarih aralığı** seçin (7 gün, 30 gün, 90 gün, 1 yıl)
+3. **Farklı sekmeler** ile analizi derinleştirin:
+   - **Genel Bakış**: KPI'lar ve trendler
+   - **Ürün Analizi**: En çok satanlar, kategori dağılımı
+   - **Sipariş Analizi**: Durum dağılımları
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔧 Özelleştirme
+
+### Yeni Kategori Ekleme
+- **Ayarlar** → **Kategoriler** → **"Kategori Ekle"**
+
+### Ürün Özelliği Tanımlama
+- **Ayarlar** → **Ürün Özellikleri** → **"Özellik Ekle"**
+- Renk, beden, materyal gibi özellikler tanımlayın
+
+### Bildirim Ayarları
+- **Ayarlar** → **Bildirimler**
+- Stok uyarıları, sipariş bildirimleri vb. ayarlayın
+
+## 📊 Demo Verileri
+
+Uygulama demo verileri ile gelir:
+- **2 örnek ürün** (Kış Kazağı, Denim Pantolon)
+- **3 kategori** (Kadın Giyim, Erkek Giyim, Aksesuar)
+- **1 örnek sipariş**
+- **Temel özellikler** (Renk, Beden)
+
+## 🎨 Tasarım Prensipleri
+
+- **Minimalist arayüz**: Gereksiz karmaşıklık yok
+- **Büyük butonlar**: Kolay erişim ve mobile uyumluluk
+- **Açık etiketler**: Her fonksiyon net şekilde işaretli
+- **Görsel hiyerarşi**: Önemli bilgiler öne çıkarılmış
+- **Tutarlı renkler**: Primary mavi tonları
+
+## 🚀 Gelecek Özellikler
+
+- **Kullanıcı yetkilendirme sistemi**
+- **Gerçek ödeme entegrasyonu** (Stripe, PayPal)
+- **E-posta bildirimleri**
+- **Gelişmiş raporlama** (PDF export)
+- **Müşteri yönetimi**
+- **Tedarikçi entegrasyonu**
+
+## 📱 Mobil Deneyim
+
+Uygulama tam responsive tasarıma sahiptir:
+- **📱 Mobil**: Kompakt menü, touch-friendly butonlar
+- **📟 Tablet**: Optimized grid layouts
+- **💻 Masaüstü**: Tam özellikli deneyim
+
+## 🤝 Katkıda Bulunma
+
+1. Fork edin
+2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
+3. Commit edin (`git commit -m 'Add amazing feature'`)
+4. Push edin (`git push origin feature/amazing-feature`)
+5. Pull Request açın
+
+## 📄 Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır.
+
+---
+
+**Not**: Bu bir demo uygulamasıdır. Gerçek e-ticaret kullanımı için ek güvenlik önlemleri ve backend entegrasyonu gereklidir.

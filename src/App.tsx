@@ -1,25 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AppProvider } from './contexts/AppContext';
+import Layout from './components/Layout/Layout';
+import Dashboard from './components/Dashboard/Dashboard';
+import ProductList from './components/Products/ProductList';
+import ProductForm from './components/Products/ProductForm';
+import OrderList from './components/Orders/OrderList';
+import Reports from './components/Reports/Reports';
+import Settings from './components/Settings/Settings';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="products" element={<ProductList />} />
+            <Route path="products/new" element={<ProductForm mode="create" />} />
+            <Route path="products/:id/edit" element={<ProductForm mode="edit" />} />
+            <Route path="orders" element={<OrderList />} />
+            <Route path="reports" element={<Reports />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+        </Routes>
+      </Router>
+    </AppProvider>
   );
 }
 
