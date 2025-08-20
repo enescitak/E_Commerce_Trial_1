@@ -7,7 +7,7 @@ const mockProducts: Product[] = [
     id: '1',
     name: 'Kış Kazağı',
     description: 'Yumuşak yün karışımı kış kazağı',
-    category: 'kadin-giyim',
+    category: 'kadin-ust',
     price: 299.99,
     compareAtPrice: 399.99,
     sku: 'KAZ-001',
@@ -49,7 +49,7 @@ const mockProducts: Product[] = [
     id: '2',
     name: 'Denim Pantolon',
     description: 'Klasik kesim denim pantolon',
-    category: 'kadin-giyim',
+    category: 'kadin-pantolon',
     price: 199.99,
     sku: 'DEN-001',
     status: 'active',
@@ -72,13 +72,85 @@ const mockProducts: Product[] = [
     createdAt: new Date('2024-01-10'),
     updatedAt: new Date('2024-01-18'),
     tags: ['denim', 'pantolon', 'casual']
+  },
+  {
+    id: '3',
+    name: 'Erkek Gömlek',
+    description: 'Pamuklu klasik erkek gömleği',
+    category: 'erkek-gomlek',
+    price: 159.99,
+    compareAtPrice: 199.99,
+    sku: 'GOM-001',
+    status: 'active',
+    images: ['/api/placeholder/300/400'],
+    variants: [
+      {
+        id: '3-1',
+        productId: '3',
+        name: 'Beyaz - M',
+        sku: 'GOM-001-M-BY',
+        inventory: 8,
+        lowStockThreshold: 5,
+        attributes: [
+          { name: 'Renk', value: 'Beyaz' },
+          { name: 'Beden', value: 'M' }
+        ],
+        status: 'active'
+      }
+    ],
+    createdAt: new Date('2024-01-05'),
+    updatedAt: new Date('2024-01-15'),
+    tags: ['gömlek', 'pamuk', 'klasik']
+  },
+  {
+    id: '4',
+    name: 'Deri Çanta',
+    description: 'El yapımı deri omuz çantası',
+    category: 'canta',
+    price: 449.99,
+    sku: 'CNT-001',
+    status: 'active',
+    images: ['/api/placeholder/300/400'],
+    variants: [
+      {
+        id: '4-1',
+        productId: '4',
+        name: 'Kahverengi',
+        sku: 'CNT-001-KH',
+        inventory: 5,
+        lowStockThreshold: 3,
+        attributes: [
+          { name: 'Renk', value: 'Kahverengi' }
+        ],
+        status: 'active'
+      }
+    ],
+    createdAt: new Date('2024-01-08'),
+    updatedAt: new Date('2024-01-12'),
+    tags: ['çanta', 'deri', 'aksesuar']
   }
 ];
 
 const mockCategories: Category[] = [
-  { id: 'kadin-giyim', name: 'Kadın Giyim', status: 'active', createdAt: new Date() },
-  { id: 'erkek-giyim', name: 'Erkek Giyim', status: 'active', createdAt: new Date() },
-  { id: 'aksesuar', name: 'Aksesuar', status: 'active', createdAt: new Date() }
+  // Ana Kategoriler
+  { id: 'kadin-giyim', name: 'Kadın Giyim', description: 'Kadınlar için giyim ürünleri', status: 'active', createdAt: new Date() },
+  { id: 'erkek-giyim', name: 'Erkek Giyim', description: 'Erkekler için giyim ürünleri', status: 'active', createdAt: new Date() },
+  { id: 'aksesuar', name: 'Aksesuar', description: 'Çanta, ayakkabı ve diğer aksesuarlar', status: 'active', createdAt: new Date() },
+  
+  // Alt Kategoriler - Kadın
+  { id: 'kadin-elbise', name: 'Elbise', description: 'Kadın elbiseleri', parentId: 'kadin-giyim', status: 'active', createdAt: new Date() },
+  { id: 'kadin-pantolon', name: 'Pantolon', description: 'Kadın pantolonları', parentId: 'kadin-giyim', status: 'active', createdAt: new Date() },
+  { id: 'kadin-ust', name: 'Üst Giyim', description: 'Bluz, tişört, kazak', parentId: 'kadin-giyim', status: 'active', createdAt: new Date() },
+  
+  // Alt Kategoriler - Erkek
+  { id: 'erkek-gomlek', name: 'Gömlek', description: 'Erkek gömlekleri', parentId: 'erkek-giyim', status: 'active', createdAt: new Date() },
+  { id: 'erkek-pantolon', name: 'Pantolon', description: 'Erkek pantolonları', parentId: 'erkek-giyim', status: 'active', createdAt: new Date() },
+  { id: 'erkek-ust', name: 'Üst Giyim', description: 'Tişört, kazak, sweatshirt', parentId: 'erkek-giyim', status: 'active', createdAt: new Date() },
+  
+  // Alt Kategoriler - Aksesuar
+  { id: 'canta', name: 'Çanta', description: 'El çantası, sırt çantası', parentId: 'aksesuar', status: 'active', createdAt: new Date() },
+  { id: 'ayakkabi', name: 'Ayakkabı', description: 'Spor ayakkabı, bot, sandalet', parentId: 'aksesuar', status: 'active', createdAt: new Date() },
+  { id: 'taki', name: 'Takı', description: 'Kolye, küpe, bilezik', parentId: 'aksesuar', status: 'active', createdAt: new Date() }
 ];
 
 const mockOrders: Order[] = [
@@ -150,6 +222,8 @@ type AppAction =
   | { type: 'UPDATE_ORDER'; payload: Order }
   | { type: 'SET_CATEGORIES'; payload: Category[] }
   | { type: 'ADD_CATEGORY'; payload: Category }
+  | { type: 'UPDATE_CATEGORY'; payload: Category }
+  | { type: 'DELETE_CATEGORY'; payload: string }
   | { type: 'SET_DASHBOARD_STATS'; payload: DashboardStats };
 
 const initialState: AppState = {
@@ -208,6 +282,16 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
       return { ...state, categories: action.payload };
     case 'ADD_CATEGORY':
       return { ...state, categories: [...state.categories, action.payload] };
+    case 'UPDATE_CATEGORY':
+      return {
+        ...state,
+        categories: state.categories.map(c => c.id === action.payload.id ? action.payload : c)
+      };
+    case 'DELETE_CATEGORY':
+      return {
+        ...state,
+        categories: state.categories.filter(c => c.id !== action.payload)
+      };
     case 'SET_DASHBOARD_STATS':
       return { ...state, dashboardStats: action.payload };
     default:

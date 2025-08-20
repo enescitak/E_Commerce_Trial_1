@@ -4,21 +4,23 @@ import { Product } from '../../types';
 import { 
   Plus, 
   Search, 
-  Filter, 
   Edit, 
   Trash2, 
   Eye, 
   MoreVertical,
   AlertTriangle,
-  Package
+  Package,
+  Folder
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ProductCategoryManager from './ProductCategoryManager';
 
 const ProductList: React.FC = () => {
   const { state } = useAppContext();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive' | 'draft'>('all');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [activeTab, setActiveTab] = useState<'products' | 'categories'>('products');
 
   const filteredProducts = state.products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -57,24 +59,74 @@ const ProductList: React.FC = () => {
     );
   };
 
+  if (activeTab === 'categories') {
+    return <ProductCategoryManager />;
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Ürünler</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Ürün Yönetimi</h1>
           <p className="mt-1 text-sm text-gray-500">
+            Ürünlerinizi ve kategorilerinizi yönetin
+          </p>
+        </div>
+        <div className="flex space-x-3">
+          <Link
+            to="/products/categories/new"
+            className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+          >
+            <Folder className="h-4 w-4 mr-2" />
+            Yeni Kategori
+          </Link>
+          <Link
+            to="/products/new"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700"
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Yeni Ürün
+          </Link>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="border-b border-gray-200">
+        <nav className="-mb-px flex space-x-8">
+          {[
+            { id: 'products', name: 'Ürünler', icon: Package, count: state.products.length },
+            { id: 'categories', name: 'Kategoriler', icon: Folder, count: state.categories.length }
+          ].map((tab) => {
+            const Icon = tab.icon;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`${
+                  activeTab === tab.id
+                    ? 'border-primary-500 text-primary-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                } whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm flex items-center`}
+              >
+                <Icon className="h-4 w-4 mr-2" />
+                {tab.name}
+                <span className="ml-2 bg-gray-100 text-gray-900 py-0.5 px-2.5 rounded-full text-xs font-medium">
+                  {tab.count}
+                </span>
+              </button>
+            );
+          })}
+        </nav>
+      </div>
+
+      {/* Products Tab Content */}
+      <div>
+        <div className="mb-4">
+          <p className="text-sm text-gray-500">
             {filteredProducts.length} ürün görüntüleniyor
           </p>
         </div>
-        <Link
-          to="/products/new"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-        >
-          <Plus className="h-4 w-4 mr-2" />
-          Yeni Ürün
-        </Link>
-      </div>
 
       {/* Filters */}
       <div className="bg-white p-4 rounded-lg shadow">
@@ -237,6 +289,7 @@ const ProductList: React.FC = () => {
             </p>
           </div>
         )}
+      </div>
       </div>
     </div>
   );
