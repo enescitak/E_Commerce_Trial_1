@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Fashion Admin Panel - Moda Mağazası Yönetim Paneli
 
 Modern ve kullanıcı dostu bir moda mağazası yönetim paneli. Küçük ve orta ölçekli moda mağazaları için özel olarak tasarlanmıştır.
@@ -162,4 +161,3 @@ Bu proje MIT lisansı altında lisanslanmıştır.
 **Not**: Bu bir demo uygulamasıdır. Gerçek e-ticaret kullanımı için ek güvenlik önlemleri ve backend entegrasyonu gereklidir.
 =======
 # E_Commerce_Trial_1
->>>>>>> origin/main
